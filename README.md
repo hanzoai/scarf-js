@@ -156,7 +156,7 @@ Alternatively, you can set this variable in your environment:
 export SCARF_ANALYTICS=false
 ```
 
-You can also set this variable in accordance to the [Console Do Not Track](https://consoledonottrack.com/) standard: 
+You can also set this variable in accordance to the [Console Do Not Track](https://donottrack.sh/) standard: 
 ```shell
 export DO_NOT_TRACK=1
 ```
