@@ -1,0 +1,20 @@
+# Canonical CI/CD config for hanzoai/scarf-js — read by the hanzoai/ci reusable
+# workflow (.hanzo/workflows/cicd.yml) and by platform.hanzo.ai.
+#
+# LIBRARY: the Scarf install-analytics client. No image, no deploy — it ships
+# from a tag.
+#
+# The gate is the jest suite over report.js: it drives the reporter with
+# recorded `npm ls` trees and asserts what it does with them — which package it
+# decides is the root, when it walks the dependency chain, and above all when
+# it declines to send anything (opt-out honoured, private package, traversal
+# skipped). Those refusals are the security surface of a postinstall reporter,
+# and a build gate cannot express any of them.
+#
+# `--ignore-scripts` on the install, deliberately: this package's own
+# `postinstall` IS report.js, so a plain `npm ci` would have the gate phone
+# home to Scarf on every run — sending telemetry as a side effect of testing
+# the telemetry. The suite calls the reporter directly, so nothing is lost.
+test:
+  - name: test
+    run: npm ci --ignore-scripts && npm test
